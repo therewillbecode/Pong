@@ -1,8 +1,8 @@
+__doc__ = """Main game loop and initialisation of game window"""
 import pygame
 pygame.init()
 import Class_Ball
 import Class_Bar
-
 from Instantiate_Initial_Objs import Draw_Init_Objs
 
 clock = pygame.time.Clock()
@@ -20,7 +20,6 @@ window_height = 600
 bar_length = 100
 bar_width = 10
 
-
 def Draw_Shapes():
     pygame.draw.circle(gameDisplay, ball.colour, [ball.x_pos, ball.y_pos], ball.radius)
     pygame.draw.rect(gameDisplay, white, [lead_x, lead_y, bar_width, bar_length])
@@ -34,7 +33,6 @@ pygame.display.update()
 
 gameExit = False
 
-
 lead_y_change = 0
 
 Draw_Init_Objs()
@@ -43,9 +41,9 @@ Draw_Init_Objs()
 while not gameExit:
 
     for event in pygame.event.get():
-        print('top y boundary ' + str(Class_Bar.Bar.top_y_boundary(bar_player)))
-        print('bottom y boundary ' + str(Class_Bar.Bar.bottom_y_boundary(bar_player)))
-        print((Class_Bar.Bar.top_y_boundary(bar_player)) - Class_Bar.Bar.bottom_y_boundary(bar_player)) # set up test that says that diff should equal length
+        #print('top y boundary ' + str(Class_Bar.Bar.top_y_boundary(bar_player)))
+        #print('bottom y boundary ' + str(Class_Bar.Bar.bottom_y_boundary(bar_player)))
+        #print((Class_Bar.Bar.top_y_boundary(bar_player)) - Class_Bar.Bar.bottom_y_boundary(bar_player)) # set up test that says that diff should equal length
         if event.type == pygame.QUIT:
             gameExit = True
 

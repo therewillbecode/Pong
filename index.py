@@ -14,6 +14,10 @@ FPS = 200
 white = (255, 255, 255)
 black = (0, 0, 0)
 red = (255, 0, 0)
+lead_y_change = 0
+gameExit = False
+pygame.init()
+gameDisplay = pygame.display.set_mode((window_width, window_height))
 
 def Draw_Shapes(gameDisplay, ball, lead_x, lead_y, bar_width, bar_length):
     pygame.draw.circle(gameDisplay, ball.colour, [ball.x_pos, ball.y_pos], ball.radius)
@@ -29,7 +33,6 @@ def eventLoop():
     pass
 
 def main():
-    pygame.init()
 
     clock = pygame.time.Clock()
 
@@ -39,12 +42,8 @@ def main():
 
     # Suggestion: You could have a method that initializes the GUI
 
-    gameDisplay = pygame.display.set_mode((window_width, window_height))
     pygame.display.set_caption('Pong')
     pygame.display.update()
-
-    gameExit = False
-    lead_y_change = 0
 
     Draw_Init_Objs()
 

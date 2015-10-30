@@ -8,11 +8,25 @@ from Instantiate_Initial_Objs import Draw_Init_Objs
 
 bar_length = 100
 bar_width = 10
+window_width = 800
+window_height = 600
+FPS = 200
+white = (255, 255, 255)
+black = (0, 0, 0)
+red = (255, 0, 0)
 
-def Draw_Shapes():
+def Draw_Shapes(gameDisplay, ball, lead_x, lead_y, bar_width, bar_length):
     pygame.draw.circle(gameDisplay, ball.colour, [ball.x_pos, ball.y_pos], ball.radius)
     pygame.draw.rect(gameDisplay, white, [lead_x, lead_y, bar_width, bar_length])
+    # FIXME ai_bar_x,y are not defined anywhere
+
     pygame.draw.rect(gameDisplay, white, [ai_bar_x, ai_bar_y, bar_width, bar_length])
+
+def initGui():
+    pass
+
+def eventLoop():
+    pass
 
 def main():
     pygame.init()
@@ -25,25 +39,19 @@ def main():
 
     # Suggestion: You could have a method that initializes the GUI
 
-    white = (255, 255, 255)
-    black = (0, 0, 0)
-    red = (255, 0, 0)
-    window_width = 800
-    window_height = 600
     gameDisplay = pygame.display.set_mode((window_width, window_height))
-
     pygame.display.set_caption('Pong')
-
     pygame.display.update()
 
     gameExit = False
-
     lead_y_change = 0
 
     Draw_Init_Objs()
 
     # Game Loop
     while not gameExit:
+
+        #eventLoop()
 
         for event in pygame.event.get():
             #pip install ipdb
@@ -69,9 +77,9 @@ def main():
 
         gameDisplay.fill(black)
 
-        Draw_Shapes()
+        Draw_Shapes(gameDisplay, ball, lead_x, lead_y, bar_width, bar_length)
         pygame.display.update()     # next frame
-        clock.tick(200)     # fps
+        clock.tick(FPS)     # fps
 
     pygame.quit()
     quit()

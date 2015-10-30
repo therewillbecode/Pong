@@ -16,17 +16,17 @@ class Bar:
         pygame.draw.rect(index.gameDisplay, index.white, [start_x, start_y, width, length])
 
     @classmethod
-    def right_edge_x_boundary(self):
-        return self.x_pos_center + (0.5 * self.width)
+    def right_edge_x_boundary(cls, bar):
+        return bar.x_pos_center + (0.5 * bar.width)
 
     @classmethod
-    def left_x_boundary(self):
-        return self.x_pos_center - (0.5 * self.width)
+    def left_x_boundary(cls, bar):
+        return bar.x_pos_center - (0.5 * bar.width)
 
     @classmethod
-    def top_y_boundary(self):
-        return self.y_pos_center - (0.5 * self.length)
+    def top_y_boundary(cls, bar):
+        return pygame.mouse.get_pos()[1] - (0.5 * bar.length)
 
     @classmethod
-    def bottom_y_boundary(self):
-        return self.y_pos_center + (0.5 * self.length)
+    def bottom_y_boundary(cls, bar):
+        return pygame.mouse.get_pos()[1] + (0.5 * bar.length)

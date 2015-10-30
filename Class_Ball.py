@@ -3,6 +3,8 @@ import index
 
 
 class Ball:
+    x_pos = 0   # x coordinate of centre of ball
+    y_pos = 0   # y coordinate of centre of ball
 
     def __init__(self, start_x, start_y, colour, radius):
         self.x_pos = start_x
@@ -23,18 +25,23 @@ class Ball:
     #   print("self.y_pos" + str(self.y_pos))
 
     def is_boundary_collision(self):
-        # window boundaries
+        self.window_boundary()
+        self.bar_boundary_x()
+        self.bar_boundary_y()
+
+    def window_boundary(self):  # window boundaries
         if self.x_pos < 0 + self.radius or self.x_pos > index.window_width - self.radius:
             self.change_direction_x()
         if self.y_pos < 0 + self.radius or self.y_pos > index.window_height - self.radius:
             self.change_direction_y()
 
-        # bar_boundary_x - circle hits side of bar
+    def bar_boundary_x(self):   # bar_boundary_x - circle hits side of bar
         if index.lead_y < self.y_pos < index.lead_y + index.bar_length:
             if index.lead_x > self.x_pos - self.radius:
                 self.change_direction_x()
 
-        # bar_boundary_y - circle hits top or bottom of bar
+    def bar_boundary_y(self):
+        # bar_boundary - circle hits top or bottom of bar
         if index.lead_y - index.bar_length < self.y_pos - self.radius < index.lead_y + index.bar_length:
             if index.lead_x - index.bar_width > self.x_pos - self.radius < index.lead_x + index.bar_width:
                 self.change_direction_y()

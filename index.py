@@ -4,6 +4,8 @@ import NN_output
 import Class_Ball
 import Class_Bar
 
+from Instantiate_Initial_Objs import Draw_Init_Objs
+
 clock = pygame.time.Clock()
 
 # neural network in action the longer you play the smarter it gets
@@ -30,24 +32,15 @@ gameExit = False
 
 lead_y_change = 0
 
-bar_player = Class_Bar.Bar(80, 30, 50, 300)
-bar_ai = Class_Bar.Bar(80, 30, 730, 300)
-
-ball = Class_Ball.Ball(400, 300, white, 20)
-
-# hold coordinates for players bar
-lead_x = bar_player.x_pos_center
-lead_y = bar_player.y_pos_center
-
-# hold coordinates for ai bar
-ai_bar_x = bar_ai.x_pos_center
-ai_bar_y = bar_ai.y_pos_center
+Draw_Init_Objs()
 
 # Game Loop
 while not gameExit:
 
     for event in pygame.event.get():
-        #print('bottom y boundary ' + str(bar_player.bottom_y_boundary()))
+        print('top y boundary ' + str(Class_Bar.Bar.top_y_boundary(bar_player)))
+        print('bottom y boundary ' + str(Class_Bar.Bar.bottom_y_boundary(bar_player)))
+        print((Class_Bar.Bar.top_y_boundary(bar_player)) - Class_Bar.Bar.bottom_y_boundary(bar_player)) # set up test that says that diff should equal length
         if event.type == pygame.QUIT:
             gameExit = True
 

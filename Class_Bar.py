@@ -13,7 +13,7 @@ class Bar:
         self.y_pos_center = start_y
         self.length = length
         self.width = width
-        self.__class_.cnt+=1
+        self.__class__.cnt+=1
 
     def draw(self, gameDisplay, color):
         pygame.draw.rect(gameDisplay, color, [self.x_pos_center, self.y_pos_center, self.width, self.length])

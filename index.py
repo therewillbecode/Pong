@@ -1,6 +1,5 @@
 import pygame
 pygame.init()
-import NN_output
 import Class_Ball
 import Class_Bar
 
@@ -22,6 +21,11 @@ bar_length = 100
 bar_width = 10
 
 
+def Draw_Shapes():
+    pygame.draw.circle(gameDisplay, ball.colour, [ball.x_pos, ball.y_pos], ball.radius)
+    pygame.draw.rect(gameDisplay, white, [lead_x, lead_y, bar_width, bar_length])
+    pygame.draw.rect(gameDisplay, white, [ai_bar_x, ai_bar_y, bar_width, bar_length])
+
 gameDisplay = pygame.display.set_mode((window_width, window_height))
 
 pygame.display.set_caption('Pong')
@@ -29,6 +33,7 @@ pygame.display.set_caption('Pong')
 pygame.display.update()
 
 gameExit = False
+
 
 lead_y_change = 0
 
@@ -48,19 +53,14 @@ while not gameExit:
 
     ball.update_pos()   # calls function to get new position of ball
 
+    # ensures bar is constrained to position within window border
     lead_y += lead_y_change
     if lead_y >= 495 or lead_y < 0:
         lead_y_change *= -1
 
     gameDisplay.fill(black)
-    pygame.draw.circle(gameDisplay, ball.colour, [ball.x_pos, ball.y_pos], ball.radius)
-    pygame.draw.rect(gameDisplay, white, [lead_x, lead_y, bar_width, bar_length])
-    pygame.draw.rect(gameDisplay, white, [ai_bar_x, ai_bar_y, bar_width, bar_length])
 
-   # pygame.draw.rect(gameDisplay, white, [bar_player.x_pos_center, bar_player.y_pos_center,
-    #                                      bar_width, bar_length])
-
-    # push  input data for NN to array for given frame(ball centre pos + player bar y_pos)
+    Draw_Shapes()
     pygame.display.update()     # next frame
     clock.tick(200)     # fps
 

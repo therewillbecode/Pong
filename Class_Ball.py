@@ -16,7 +16,9 @@ class Ball:
         self.radius = radius
         self.x_change = self.SPEEDX
         self.y_change = self.SPEEDY
-        pygame.draw.circle(index.gameDisplay, self.colour, [start_x, start_y], radius)
+
+    def draw(self, gameDisplay):
+        pygame.draw.circle(gameDisplay, self.colour, [self.x_pos, self.y_pos], self.radius)
 
     def update_pos(self):
         self.update_on_collision()         # change direction if boundary is hit

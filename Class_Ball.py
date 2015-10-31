@@ -33,9 +33,9 @@ class Ball:
         self.handle_window_boundary()
         print(bar_list[0].left_x_boundary())
         print(bar_list[0].right_edge_x_boundary())
-        for bar in bar_list:
-            self.handle_bar_boundary_x(bar)
-            self.handle_bar_boundary_y(bar)
+        # change to loop for all bars
+        self.handle_bar_boundary_x(bar_list[0])
+        self.handle_bar_boundary_y(bar_list[0])
 
     def handle_window_boundary(self):  # window boundaries
         if self.x_pos < 0 + self.radius or self.x_pos > index.window_width - self.radius:
@@ -44,14 +44,14 @@ class Ball:
             self.change_direction_y()
 
     def handle_bar_boundary_x(self, bar):   # bar_boundary_x - circle hits side of bar
-        if index.lead_y < self.y_pos < index.lead_y + index.bar_length:
-            if index.lead_x > self.x_pos - self.radius:
+        if bar.top_y_boundary() < self.y_pos < bar.bottom_y_boundary() + bar.length:
+            if bar.right_edge_x_boundary() > self.x_pos - self.radius:
                 self.change_direction_x()
 
     def handle_bar_boundary_y(self, bar):
         # bar_boundary - circle hits top or bottom of bar
-        if index.lead_y - index.bar_length < self.y_pos - self.radius < index.lead_y + index.bar_length:
-            if index.lead_x - index.bar_width > self.x_pos - self.radius < index.lead_x + index.bar_width:
+        if bar.top_y_boundary() - bar.length < self.y_pos - self.radius < bar.bottom_y_boundary() + bar.length:
+            if bar.right_edge_x_boundary() - bar.width > self.x_pos - self.radius < bar.left_x_boundary() + bar.width:
                 self.change_direction_y()
 
     def change_direction_x(self):

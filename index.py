@@ -50,7 +50,7 @@ def main():
     pygame.display.set_caption('Pong')
     pygame.display.update()
 
-    player_bar, ai_bar, ball, bar_list = Draw_Init_Objs(gameDisplay, white)
+    player_bar, ai_bar, ball, bar_list = Draw_Init_Objs(gameDisplay, white, bar_length, bar_width)
 
     # Game Loop
     while not gameExit:

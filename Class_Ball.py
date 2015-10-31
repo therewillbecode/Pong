@@ -20,8 +20,8 @@ class Ball:
     def draw(self, gameDisplay):
         pygame.draw.circle(gameDisplay, self.colour, [self.x_pos, self.y_pos], self.radius)
 
-    def update_pos(self):
-        self.update_on_collision()         # change direction if boundary is hit
+    def update_pos(self, bar_list):
+        self.update_on_collision(bar_list)         # change direction if boundary is hit
         self.traverse()                      # move in direction
 
     def traverse(self):
@@ -29,10 +29,13 @@ class Ball:
         self.y_pos += self.y_change
     #   print("self.y_pos" + str(self.y_pos))
 
-    def update_on_collision(self):
+    def update_on_collision(self, bar_list):
         self.handle_window_boundary()
-        self.handle_bar_boundary_x()
-        self.handle_bar_boundary_y()
+        print(bar_list[0].left_x_boundary())
+        print(bar_list[0].right_edge_x_boundary())
+        for bar in bar_list:
+            self.handle_bar_boundary_x(bar)
+            self.handle_bar_boundary_y(bar)
 
     def handle_window_boundary(self):  # window boundaries
         if self.x_pos < 0 + self.radius or self.x_pos > index.window_width - self.radius:
@@ -40,12 +43,12 @@ class Ball:
         if self.y_pos < 0 + self.radius or self.y_pos > index.window_height - self.radius:
             self.change_direction_y()
 
-    def handle_bar_boundary_x(self):   # bar_boundary_x - circle hits side of bar
+    def handle_bar_boundary_x(self, bar):   # bar_boundary_x - circle hits side of bar
         if index.lead_y < self.y_pos < index.lead_y + index.bar_length:
             if index.lead_x > self.x_pos - self.radius:
                 self.change_direction_x()
 
-    def handle_bar_boundary_y(self):
+    def handle_bar_boundary_y(self, bar):
         # bar_boundary - circle hits top or bottom of bar
         if index.lead_y - index.bar_length < self.y_pos - self.radius < index.lead_y + index.bar_length:
             if index.lead_x - index.bar_width > self.x_pos - self.radius < index.lead_x + index.bar_width:

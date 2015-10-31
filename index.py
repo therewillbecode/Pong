@@ -83,7 +83,7 @@ def main():
         gameDisplay.fill(black)
         drawShapes(gameDisplay, ball, player_bar, ai_bar)
         pygame.display.update()     # next frame
-        clock.tick(FPS)     # fps
+        clock.tick(FPS)     # fps`
 
     pygame.quit()
     quit()

@@ -7,7 +7,7 @@ import Class_Bar
 from Instantiate_Initial_Objs import Draw_Init_Objs
 
 bar_length = 100
-bar_width = 10
+bar_width = 20
 window_width = 800
 window_height = 600
 FPS = 200
@@ -21,16 +21,20 @@ gameExit = False
 pygame.init()
 gameDisplay = pygame.display.set_mode((window_width, window_height))
 
-def Draw_Shapes(gameDisplay, ball, player_bar, ai_bar):
+
+def drawShapes(gameDisplay, ball, player_bar, ai_bar):
     pygame.draw.circle(gameDisplay, ball.colour, [ball.x_pos, ball.y_pos], ball.radius)
-    pygame.draw.rect(gameDisplay, white, [player_bar.x_pos_center, player_bar.y_pos_center, player_bar.width, player_bar.length])
-    pygame.draw.rect(gameDisplay, white, [ai_bar.x_pos_center, ai_bar.y_pos_center, ai_bar.width, ai_bar.length])
+    pygame.draw.rect(gameDisplay, white, [player_bar.x_pos, player_bar.y_pos, player_bar.width, player_bar.length])
+    pygame.draw.rect(gameDisplay, white, [ai_bar.x_pos, ai_bar.y_pos, ai_bar.width, ai_bar.length])
+
 
 def initGui():
     pass
 
+
 def eventLoop():
     pass
+
 
 def main():
     global lead_y, lead_x, lead_y_change, gameDisplay, gameExit
@@ -46,7 +50,7 @@ def main():
     pygame.display.set_caption('Pong')
     pygame.display.update()
 
-    player_bar, ai_bar, ball = Draw_Init_Objs(gameDisplay, white)
+    player_bar, ai_bar, ball, bar_list = Draw_Init_Objs(gameDisplay, white)
 
     # Game Loop
     while not gameExit:
@@ -68,26 +72,26 @@ def main():
             if event.type == pygame.QUIT:
                 gameExit = True
 
-        lead_y = (pygame.mouse.get_pos()[1]) - bar_length/2
+        player_bar.y_pos = (pygame.mouse.get_pos()[1]) - bar_length/2
 
-        ball.update_pos()   # calls function to get new position of ball
+        ball.update_pos(bar_list)   # calls function to get new position of ball
 
         # ensures bar is constrained to position within window border
         # FIXME this doesnt update the player bar object actually :P
         lead_y, lead_y_change = update_player_bar(lead_y, lead_y_change, window_height, bar_length)
 
         gameDisplay.fill(black)
-
-        Draw_Shapes(gameDisplay, ball, player_bar, ai_bar)
+        drawShapes(gameDisplay, ball, player_bar, ai_bar)
         pygame.display.update()     # next frame
         clock.tick(FPS)     # fps
 
     pygame.quit()
     quit()
 
+
 def update_player_bar(lead_y, lead_y_change, window_height, bar_length ):
     lead_y += lead_y_change
-    if lead_y >= window_height - 2* bar_length or lead_y < 0:
+    if lead_y >= window_height - 2 * bar_length or lead_y < 0:
         lead_y_change *= -1
 
     return lead_y, lead_y_change

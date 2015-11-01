@@ -1,7 +1,7 @@
 __doc__ = """Main game loop and initialisation of game window"""
 
 import pygame
-
+import AI_Decision
 import Class_Ball
 import Class_Bar
 from Instantiate_Initial_Objs import Draw_Init_Objs
@@ -26,6 +26,9 @@ def drawShapes(gameDisplay, ball, player_bar, ai_bar):
     pygame.draw.circle(gameDisplay, ball.colour, [ball.x_pos, ball.y_pos], ball.radius)
     pygame.draw.rect(gameDisplay, white, [player_bar.x_pos, player_bar.y_pos, player_bar.width, player_bar.length])
     pygame.draw.rect(gameDisplay, white, [ai_bar.x_pos, ai_bar.y_pos, ai_bar.width, ai_bar.length])
+
+def scoreMsg(num):
+    centre = (int(window_width/2), int (window_height/2))
 
 
 def initGui():
@@ -73,9 +76,10 @@ def main():
                 gameExit = True
 
         player_bar.y_pos = (pygame.mouse.get_pos()[1]) - bar_length/2
-
+        ai_bar.y_pos = AI_Decision.rand(ball)
         ball.update_pos(bar_list)   # calls function to get new position of ball
 
+        print(str(AI_Decision.rand(ball)))
         # ensures bar is constrained to position within window border
         # FIXME this doesnt update the player bar object actually :P
         lead_y, lead_y_change = update_player_bar(lead_y, lead_y_change, window_height, bar_length)
